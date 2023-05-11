@@ -7,7 +7,8 @@ const Overallrating = db.define("overallrating", {
       type: Sequelize.INTEGER,
       field:"id",
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      autoIncrement: true,
     },
     Averagestarcount: {
       type: Sequelize.INTEGER,

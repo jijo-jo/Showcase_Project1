@@ -7,7 +7,8 @@ const Users = db.define("users", {
       type: Sequelize.INTEGER,
       field:"id",
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      autoIncrement:true
     },
     UserName: {
       type: Sequelize.STRING,
@@ -53,13 +54,6 @@ const Users = db.define("users", {
         type: Sequelize.STRING,
         field:"phonenumber",
         allowNull: false
-      },
-    credentialId:{
-        type: Sequelize.INTEGER,
-        references:{
-          model:"credentials",
-          key:"id"
-        }
       },
     createdAt: {
       allowNull: false,

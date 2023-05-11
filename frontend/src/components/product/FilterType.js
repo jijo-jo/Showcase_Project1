@@ -5,31 +5,32 @@ const FilterType = (props) => {
     let filterType;
 
     switch(props.type) {
-        case "case_material":
+        case "brand":
             filterType =
                 <ul className="filter-list">
-                    <Filter type={props.type} name="Stainless Steel" handleAddFilter={props.handleAddFilter}/>
-                    <Filter type={props.type} name="Titanium" handleAddFilter={props.handleAddFilter}/>
-                    <Filter type={props.type} name="Brass" handleAddFilter={props.handleAddFilter}/>
-                    <Filter type={props.type} name="Alloy" handleAddFilter={props.handleAddFilter}/>
+                    <Filter type={props.type} name="rolex" handleAddFilter={props.handleAddFilter}/>
+                    <Filter type={props.type} name="titan" handleAddFilter={props.handleAddFilter}/>
+                    <Filter type={props.type} name="fastrack" handleAddFilter={props.handleAddFilter}/>
+                    <Filter type={props.type} name="mi" handleAddFilter={props.handleAddFilter}/>
                 </ul>
             break;
-        case "mechanism":
+        case "color":
             filterType =
                 <ul className="filter-list">
-                    <Filter type={props.type} name="Automatic" handleAddFilter={props.handleAddFilter}/>
-                    <Filter type={props.type} name="Mechanical" handleAddFilter={props.handleAddFilter}/>
-                    <Filter type={props.type} name="Quartz" handleAddFilter={props.handleAddFilter}/>
+                    <Filter type={props.type} name="red" handleAddFilter={props.handleAddFilter}/>
+                    <Filter type={props.type} name="blue" handleAddFilter={props.handleAddFilter}/>
+                    <Filter type={props.type} name="green" handleAddFilter={props.handleAddFilter}/>
+                    <Filter type={props.type} name="white" handleAddFilter={props.handleAddFilter}/>
+                    <Filter type={props.type} name="black" handleAddFilter={props.handleAddFilter}/>
+                    
                 </ul>
             break;
-        case "band_material":
+        case "category":
             filterType =
                 <ul className="filter-list">
-                    <Filter type={props.type} name="Stainless Steel" handleAddFilter={props.handleAddFilter}/>
-                    <Filter type={props.type} name="Titanium" handleAddFilter={props.handleAddFilter}/>
-                    <Filter type={props.type} name="Leather" handleAddFilter={props.handleAddFilter}/>
-                    <Filter type={props.type} name="Synthetic Leather" handleAddFilter={props.handleAddFilter}/>
-                    <Filter type={props.type} name="Hemp" handleAddFilter={props.handleAddFilter}/>
+                    <Filter type={props.type} name="men" handleAddFilter={props.handleAddFilter}/>
+                    <Filter type={props.type} name="women" handleAddFilter={props.handleAddFilter}/>
+                    <Filter type={props.type} name="children" handleAddFilter={props.handleAddFilter}/>
                 </ul>
             break;
         default:

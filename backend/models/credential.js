@@ -6,6 +6,7 @@ const Credentials = db.define("credentials", {
     Id: {
       type: Sequelize.INTEGER,
       field:"id",
+      autoIncrement: true,
       primaryKey: true,
       allowNull: false
     },
@@ -18,6 +19,13 @@ const Credentials = db.define("credentials", {
       type: Sequelize.STRING,
       field:"password",
       allowNull: false
+    },
+    userId:{
+       type:Sequelize.INTEGER,
+       references:{
+          model:"users",
+          key:"id"
+       }
     },
     roleId:{
       type: Sequelize.INTEGER,

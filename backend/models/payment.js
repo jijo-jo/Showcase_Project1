@@ -7,7 +7,8 @@ const Payments = db.define("payments", {
       type: Sequelize.INTEGER,
       field:"id",
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      autoIncrement: true,
     },
     Amount: {
       type: Sequelize.INTEGER,

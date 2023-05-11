@@ -22,33 +22,38 @@ import Orderdeatailspage from './pages/AdminPages/Orderdetailspage';
 import Employeelist from './pages/SuperAdminPages/Userslist';
 import AddEmployeepage from './pages/SuperAdminPages/AddEmployeepage';
 import Addnewwatch from './pages/Addnewwatch';
+import Nomatch from './pages/Nomatch';
+import Cartfunction from './pages/cart/Cartfunctin';
 
 class App extends React.Component {
-
     render() {
         return (
             <BrowserRouter>
-                <Header />
+               {localStorage.getItem("Accesstoken") &&<Header />}
                     <Switch>
-                        <Route exact path="/" component={Homepage} />
-                        <Route path="/aboutus" component={AboutUs} />
-                        <Route path="/contact" component={Contact} />
-                        <Route path="/terms" component={Terms} />
-                        <Route path="/vintage/" component={CategoryVintage} />
-                        <Route path="/extant/" component={CategoryExtant} />
-                        <Route path="/steampunk/" component={CategorySteampunk} />
-                        <Route path="/allproducts/" component={AllProducts} />
-                        <Route path="/product/:productnumber" component={ProductPage} />
-                        <Route path="/cart" component={Cart} />
-                        <Route path="/login" component={LogInPage}/>
-                        <Route path="/register" component={RegisterPage}/>
-                        <Route path="/forget-password" component={ForgetPasswordPage}/>
-                        <Route path="/antdtable" component={Antdtable}/>
-                        <Route path="/deliverypage" component={PageforviewDeliveries}/>
-                        <Route path="/orderdetails" component={Orderdeatailspage}/>
-                        <Route path="/employeelist" component={Employeelist}/>
-                        <Route path="/addemployee" component={AddEmployeepage}/>
-                        <Route path="/addnewwatch" component={Addnewwatch}/>
+                        <Route exact path="/" component={LogInPage}/>  
+                        <Route exact  path="/home" component={Homepage} />
+                        <Route exact  path="/aboutus" component={AboutUs} />
+                        <Route exact  path="/contact" component={Contact} />
+                        <Route exact  path="/terms" component={Terms} />
+                        <Route exact  path="/vintage/" component={CategoryVintage} />
+                        <Route exact  path="/extant/" component={CategoryExtant} />
+                        <Route exact  path="/steampunk/" component={CategorySteampunk} />
+                        <Route exact  path="/allproducts/" component={AllProducts} />
+                        <Route exact  path="/product/:productnumber" component={ProductPage} />
+                        <Route exact  path="/cart" component={Cart} />
+                        <Route exact  path="/login" component={LogInPage}/>
+                        <Route exact  path="/register" component={RegisterPage}/>
+                        <Route exact  path="/forget-password" component={ForgetPasswordPage}/>
+                        <Route exact  path="/antdtable" component={Antdtable}/>
+                        <Route exact  path="/deliverypage" component={PageforviewDeliveries}/>
+                        <Route exact  path="/orderdetails" component={Orderdeatailspage}/>
+                        <Route exact  path="/employeelist" component={Employeelist}/>
+                        <Route exact  path="/addemployee" component={AddEmployeepage}/>
+                        <Route exact path="/addnewwatch" component={Addnewwatch}/>
+                        <Route exact path="/cartfunction" component={Cartfunction}/>
+                        <Route path="/*" component={Nomatch}/>
+                      
                     </Switch>
             </BrowserRouter>
         )

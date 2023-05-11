@@ -1,17 +1,44 @@
 import React from 'react';
 import { Space, Table, Tag } from 'antd';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Button, Modal } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { Dropdown, Typography } from 'antd';
+import { getallusers,deleteUser} from '../../api';
+
 
 function Employeelist() {
 
-    const navigatetoadd=()=>{
+    const [userList,setUserlist] = useState([]);
+    useEffect(()=>{
+       getallusers()
+       .then((response)=>{
+        let allusers = [];
+        response.data.map((item) => {
+            let singleuser ={}
+            singleuser.ename = item.UserName;
+            singleuser.role = item.credential.role.Rolename;
+            singleuser.key = item.Id;
+            singleuser.address = item.Housename+'(H),'+item.Postoffice+'(P.O),'+item.District;
+            singleuser.email = item.Email;
+            singleuser.phonenumber = item.Phonenumber
+            allusers.push(singleuser);
+        })
+        console.log(allusers);
+        setUserlist(allusers);
+        ;
+       })
+       .catch((err)=>{
+        console.log(err);
+       })
 
+    },[]);
+
+    const navigatetoadd=()=>{
+        window.location = '/addemployee'
     }
     const ondelete=()=>{
-
+    
     }
     const columns = [
         {
@@ -31,43 +58,33 @@ function Employeelist() {
             key: 'role',
         },
         {
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email',
+        },
+        {
+            title:'Phone Number',
+            dataIndex:'phonenumber',
+            key:'phonenumber'
+
+        },
+        {
             title: 'Action',
             key: 'action',
-            render: (_, record) => (
-                <Space size="middle">
-                    <Button type="primary" onClick={ondelete}>
-                        Delete
-                    </Button>
-                </Space>
-            ),
-        },
-    ];
-
-    const data = [
-        {
-            key: '1',
-            role: 'deliveryboy',
-            ename:'jijo12',
-            address: 'New York No. 1 Lake Park'
-        },
-        {
-            key: '2',
-            role: 'Manager',
-            ename:'jijo13',
-            address: 'New York No. 1 Lake Park'
-        },
-        {
-            key: '3',
-            role: 'staff',
-            ename:'jijo14',
-            address: 'New York No. 1 Lake Park'
+            // render: (_, record) => (
+            //     <Space size="middle">
+            //         <Button type="primary" onClick={ondelete}>
+            //             Delete
+            //         </Button>
+            //     </Space>
+            // ),
         },
     ];
 
     return (
         <div>
             <Button onClick={navigatetoadd}>Add</Button>
-            <Table columns={columns} dataSource={data} />
+            <Table columns={columns} dataSource={userList} />
         </div>);
 }
 

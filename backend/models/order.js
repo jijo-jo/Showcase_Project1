@@ -7,7 +7,8 @@ const Orders = db.define("orders", {
       type: Sequelize.INTEGER,
       field:"id",
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      autoIncrement: true,
     },
     Orderstatus: {
       type: Sequelize.STRING,

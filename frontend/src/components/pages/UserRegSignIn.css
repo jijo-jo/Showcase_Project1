@@ -7,7 +7,8 @@
 }
 
 body {
-    margin: 0 auto
+    margin: 0 auto;
+    /* background-image: url('./pocket-watches-time-of-time-watches-51396.jpeg'); */
 }
 
 .m-5-auto {
@@ -72,7 +73,8 @@ body {
 
 /***    Login Page     ***/
 h2 {
-    font-weight: 300
+    font-weight: 300;
+    color: #ddd;
 }
 
 form {

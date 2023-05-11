@@ -5,6 +5,7 @@ const db = require('../config/database');
 const Watches = db.define("watches", {
     Id: {
       type: Sequelize.INTEGER,
+      autoIncrement: true,
       field:"id",
       primaryKey: true,
       allowNull: false

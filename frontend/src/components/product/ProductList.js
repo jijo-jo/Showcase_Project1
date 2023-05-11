@@ -1,8 +1,10 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import ProductTile from './ProductTile';
 import Filters from './Filters';
 import NoResults from '../pages/NoResults';
-import { watches } from '../../api/watches';
+// import { watches } from '../../api/watches';
+import { getAllwatches } from '../api';
+
 
 class ProductList extends React.Component {
     constructor() {
@@ -12,9 +14,9 @@ class ProductList extends React.Component {
             watches: [],
             filteredWatches: [],
             filters: {
-                case_material: "",
-                mechanism: "",
-                band_material: ""
+                brand: "",
+                color: "",
+                category: ""
             }
         }
 
@@ -25,27 +27,27 @@ class ProductList extends React.Component {
     }
 
     displayProductList() {
-        const productList = watches.filter(watch => watch.category === this.props.category);
+        const productList = this.state.watches.filter(watch => watch.category === this.props.category);
         this.setState({ watches: productList });
     }
 
     filterProducts() {
         const filters = this.state.filters;
         let filteredWatches = [];
-        if (filters.case_material !== "" && filters.mechanism === "" && filters.band_material === "") {
-            filteredWatches = this.state.watches.filter(watch => watch.case_material === this.state.filters.case_material);
-        } else if (filters.case_material === "" && filters.mechanism !== "" && filters.band_material === "") {
-            filteredWatches = this.state.watches.filter(watch => watch.mechanism === this.state.filters.mechanism);
-        } else if (filters.case_material === "" && filters.mechanism === "" && filters.band_material !== "") {
-            filteredWatches = this.state.watches.filter(watch => watch.band_material === this.state.filters.band_material);
-        } else if (filters.case_material !== "" && filters.mechanism !== "" && filters.band_material === "") {
-            filteredWatches = this.state.watches.filter(watch => watch.case_material === this.state.filters.case_material && watch.mechanism === this.state.filters.mechanism );
-        } else if (filters.case_material !== "" && filters.mechanism === "" && filters.band_material !== "") {
-            filteredWatches = this.state.watches.filter(watch => watch.case_material === this.state.filters.case_material && watch.band_material === this.state.filters.band_material );
-        } else if (filters.case_material === "" && filters.mechanism !== "" && filters.band_material !== "") {
-            filteredWatches = this.state.watches.filter(watch => watch.mechanism === this.state.filters.mechanism && watch.band_material === this.state.filters.band_material );
-        } else if (filters.case_material !== "" && filters.mechanism !== "" && filters.band_material !== "") {
-            filteredWatches = this.state.watches.filter(watch => watch.case_material === this.state.filters.case_material && watch.mechanism === this.state.filters.mechanism && watch.band_material === this.state.filters.band_material );
+        if (filters.brand !== "" && filters.color === "" && filters.category === "") {
+            filteredWatches = this.state.watches.filter(watch => watch.Brand === this.state.filters.brand);
+        } else if (filters.brand === "" && filters.color !== "" && filters.category === "") {
+            filteredWatches = this.state.watches.filter(watch => watch.Color === this.state.filters.color);
+        } else if (filters.brand === "" && filters.color === "" && filters.category !== "") {
+            filteredWatches = this.state.watches.filter(watch => watch.For_whom === this.state.filters.category);
+        } else if (filters.brand !== "" && filters.color !== "" && filters.category === "") {
+            filteredWatches = this.state.watches.filter(watch => watch.Brand === this.state.filters.brand && watch.Color === this.state.filters.color );
+        } else if (filters.brand !== "" && filters.color === "" && filters.category !== "") {
+            filteredWatches = this.state.watches.filter(watch => watch.Brand=== this.state.filters.brand && watch.For_whom === this.state.filters.category );
+        } else if (filters.brand === "" && filters.color !== "" && filters.category !== "") {
+            filteredWatches = this.state.watches.filter(watch => watch.Color === this.state.filters.color && watch.For_whom === this.state.filters.category );
+        } else if (filters.brand !== "" && filters.color !== "" && filters.category !== "") {
+            filteredWatches = this.state.watches.filter(watch => watch.Brand === this.state.filters.brand && watch.Color === this.state.filters.color && watch.For_whom === this.state.filters.category );
         }
         this.setState({filteredWatches});
     }
@@ -63,25 +65,25 @@ class ProductList extends React.Component {
     }
 
     componentDidMount() {
-        if (this.props.category === "all") {
-            this.setState({watches})
-        } else {
-            this.displayProductList();
-        }
+        getAllwatches()
+       .then((res)=>{
+          console.log(res.data)
+          this.setState({watches:res.data})
+       }).catch(err=>{console.log(err)})
     }
 
     render() {
         const hasFilters = (this.props.category === "all" && this.props.limit !== 0);
         const filters = this.state.filters;
-        const showWatches = (filters.case_material !== "" || filters.mechanism !== "" || filters.band_material !== "") ? "filteredWatches" : "watches";
-        const limit = (this.props.limit > 0) ? this.props.limit : watches.length;
+        const showWatches = (filters.brand !== "" || filters.color !== "" || filters.category !== "") ? "filteredWatches" : "watches";
+        const limit = (this.props.limit > 0) ? this.props.limit : this.state.watches.length;
         let hasWatches = this.state[showWatches].length;
         return (
             <div className={hasFilters ? "product-list" : "product-list filters"}>
                 {hasFilters ? "" : <Filters
-                                        case={this.state.filters.case_material}
-                                        mechanism={this.state.filters.mechanism}
-                                        band={this.state.filters.band_material}
+                                        brand={this.state.filters.brand}
+                                        color={this.state.filters.color}
+                                        category={this.state.filters.category}
                                         handleAddFilter={this.handleAddFilter}
                                         handleRemoveFilter={this.handleRemoveFilter}
                                     />}
@@ -89,7 +91,7 @@ class ProductList extends React.Component {
                 {hasWatches ?
                     <div className="product-grid">
                         {this.state[showWatches].slice(0, limit).map(index =>
-                            <ProductTile key={index.id} watch={index} />
+                            <ProductTile key={index.Id} watch={index} />
                         )}
                     </div>
                     :

@@ -7,7 +7,8 @@ const Rating = db.define("rating", {
       type: Sequelize.INTEGER,
       field:"id",
       primaryKey: true,
-      allowNull: false
+      allowNull: false,
+      autoIncrement: true,
     },
     Starcount: {
       type: Sequelize.INTEGER,

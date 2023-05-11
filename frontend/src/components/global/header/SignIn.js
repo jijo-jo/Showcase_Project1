@@ -1,16 +1,15 @@
 import React from 'react';
 import { NavHashLink as NavLink } from 'react-router-hash-link';
+import { Button } from 'antd';
 
 
 const SignIn = (props) =>  {
+    const handlelogout = ()=>{
+        localStorage.clear();
+        window.location = '/'
+    }
     return (
-        <div className="menu-item login">
-            <NavLink to="/login#app">
-                <span className="login">
-                    <i class="fa fa-user-circle" aria-hidden="true"></i>
-                </span>
-            </NavLink>
-        </div>
+          <Button onClick={handlelogout}>SignOut</Button>
     )
 }
 

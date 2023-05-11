@@ -6,22 +6,22 @@ const Filters = (props) => {
         <div className="product-filters">
             <p className="filters-title">Filter by</p>
             <div action="" className="filters-wrapper">
-                {(props.case !== "") ?
-                    <span className="applied-filter-name" onClick={() => props.handleRemoveFilter("case_material")}>{props.case}</span>
+                {(props.brand !== "") ?
+                    <span className="applied-filter-name" onClick={() => props.handleRemoveFilter("brand")}>{props.brand}</span>
                     :
-                    <FilterType type="case_material" name="Case Material" handleAddFilter={props.handleAddFilter} />
+                    <FilterType type="brand" name="Brand" handleAddFilter={props.handleAddFilter} />
                 }
 
-                {(props.mechanism !== "") ?
-                    <span className="applied-filter-name" onClick={() => props.handleRemoveFilter("mechanism")}>{props.mechanism}</span>
+                {(props.color !== "") ?
+                    <span className="applied-filter-name" onClick={() => props.handleRemoveFilter("color")}>{props.color}</span>
                     :
-                    <FilterType type="mechanism" name="Mechanism" handleAddFilter={props.handleAddFilter} />
+                    <FilterType type="color" name="Color" handleAddFilter={props.handleAddFilter} />
                 }
 
-                {(props.band !== "") ?
-                    <span className="applied-filter-name" onClick={() => props.handleRemoveFilter("band_material")}>{props.band}</span>
+                {(props.category !== "") ?
+                    <span className="applied-filter-name" onClick={() => props.handleRemoveFilter("category")}>{props.category}</span>
                     :
-                    <FilterType type="band_material" name="Band Material" handleAddFilter={props.handleAddFilter} />
+                    <FilterType type="category" name="Category" handleAddFilter={props.handleAddFilter} />
                 }
             </div>
         </div>
