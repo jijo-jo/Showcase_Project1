@@ -1,6 +1,6 @@
 const orderdao= require("../dao/order.dao");
 function findAllorder(req,res){
-    orderdao.findAllorders()
+    orderdao.findAllorderforApproves()
     .then((data)=>{
         res.send(data);
     })
@@ -9,6 +9,19 @@ function findAllorder(req,res){
 
     });
 }
+
+function tobedelivered(req,res){
+     orderdao.findAllorderforDelivery()
+     .then((data)=>{
+        res.send(data);
+    })
+    .catch((error)=>{
+        res.status(401).send({message: "find orders "+error})
+
+    });
+
+}
+
 function findusinguserId(req,res){
      orderdao.findAllusinguserId(req.body.userId)
      .then((data)=>{
@@ -25,7 +38,8 @@ function addordertoorders(req,res){
         Orderstatus:req.body.orderstatus,
         Deliverystatus:req.body.deliverystatus,
         userId:req.body.userId,
-        watchId:req.body.watchId
+        watchId:req.body.watchId,
+        Countofwatch:req.body.countofwatch
     }
     orderdao.addtoorder(orders)
     .then((data)=>{
@@ -79,7 +93,8 @@ var ordercontroller ={
     addordertoorders:addordertoorders,
     updateDeliverystatus:updateDeliverystatus,
     updateOrderstatus:updateOrderstatus,
-    deleteOrder:deleteOrder
+    deleteOrder:deleteOrder,
+    tobedelivered:tobedelivered
     
 
 }

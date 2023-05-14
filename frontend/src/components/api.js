@@ -10,6 +10,11 @@ var ALL_WATCHES ='http://localhost:4000/watches/watches'
 var ADD_TO_CART = 'http://localhost:4000/cart/addcart'
 var GET_ALL_CARTITEMS = "http://localhost:4000/cart/findbyuserId"
 var UPDATE_STATUS ="http://localhost:4000/cart/cartstatus"
+var GET_ALL_ORDERS = "http://localhost:4000/orders/allorders"
+var GET_ALL_ORDERS_USERID = "http://localhost:4000/orders/userorder"
+var ADD_PAYMENT = "http://localhost:4000/payment/addpayment"
+var ADD_ORDER = "http://localhost:4000/orders/addorder"
+var UPDATE_STOCK = "http://localhost:4000/watches/stockchange"
 
 export async function login(data){
     console.log(data);
@@ -53,5 +58,20 @@ export async function updatecartstaus(data){
 }
 
 export async function getAllOrders(){
-    
+    return axios.get(GET_ALL_ORDERS);
+}
+export async function getOrdersuserId(data){
+    return axios.post(GET_ALL_ORDERS_USERID,data)
+}
+
+export async function payment(data){
+   return axios.post(ADD_PAYMENT,data);
+}
+
+export async function addOrder(data){
+    return axios.post(ADD_ORDER,data)
+}
+
+export async function updateStock(data){
+    return axios.post(UPDATE_STOCK,data);
 }

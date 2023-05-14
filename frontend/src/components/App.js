@@ -24,6 +24,8 @@ import AddEmployeepage from './pages/SuperAdminPages/AddEmployeepage';
 import Addnewwatch from './pages/Addnewwatch';
 import Nomatch from './pages/Nomatch';
 import Cartfunction from './pages/cart/Cartfunctin';
+import Ordertobedelivered from './pages/AdminPages/Orderstobedelivered';
+import OrderofUsers from './pages/Users/Veiworders';
 
 class App extends React.Component {
     render() {
@@ -52,6 +54,8 @@ class App extends React.Component {
                         <Route exact  path="/addemployee" component={AddEmployeepage}/>
                         <Route exact path="/addnewwatch" component={Addnewwatch}/>
                         <Route exact path="/cartfunction" component={Cartfunction}/>
+                        <Route exact path="/orderstodelver" component={Ordertobedelivered}/>
+                        <Route exact path="/orderofuser" component={OrderofUsers}/>
                         <Route path="/*" component={Nomatch}/>
                       
                     </Switch>

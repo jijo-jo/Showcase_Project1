@@ -20,6 +20,16 @@ const Orders = db.define("orders", {
       field:"deliverystatus",
       allowNull: true
     },
+    DeliveryboyId:{
+       type:Sequelize.INTEGER,
+       field:"delveryboy",
+       allowNull:true
+    },
+    Countofwatch:{
+      type:Sequelize.INTEGER,
+      field:"countofwatch",
+      allowNull:true
+    },
     userId:{
       type: Sequelize.INTEGER,
       references:{

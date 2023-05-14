@@ -9,5 +9,6 @@ orderRouter.post('/addorder',ordercontroller.addordertoorders);
 orderRouter.post('/orderstatus',ordercontroller.updateOrderstatus);
 orderRouter.post('/deliverystatrus',ordercontroller.updateDeliverystatus);
 orderRouter.post('/delete',ordercontroller.deleteOrder);
+orderRouter.get('/todeliverorder',ordercontroller.tobedelivered);
 
 module.exports = orderRouter

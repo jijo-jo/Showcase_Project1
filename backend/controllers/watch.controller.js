@@ -1,4 +1,9 @@
 const watchdao = require('../dao/watch.dao')
+const fs = require('fs');
+  
+
+    
+
 
 function findaAllwatches(req, res){
 
@@ -24,7 +29,7 @@ function findwatchbyid(req,res){
     });
 }
 
-function addnewwatch(req,res){
+async function addnewwatch(req,res){
       let watch ={
         Name:req.body.name,
         ModelInfo:req.body.model,
@@ -36,9 +41,15 @@ function addnewwatch(req,res){
         Price:req.body.price,
         Offer:req.body.offer,
         Stockavailable:req.body.stock,
-        Image:req.body.image,
+        Image: `/images/products/${req.body.name}-${req.body.model}.png`
 
       }
+      let filePath = req.body.image;
+      let filePathCopy = `D:/My projects/Showcase_Project1/frontend/public/images/products/${req.body.name}-${req.body.model}.png`;
+      fs.copyFile(filePath, filePathCopy, (err) => {
+        if (err) throw err;
+      });
+
       watchdao.addtowatch(watch)
       .then((data)=>{
           res.send(data);
@@ -74,12 +85,27 @@ function updatewatch(req,res){
       });
 }
 
+function updatewatchstock(req,res){
+    let watch ={
+        Stockavailable:req.body.stock
+      }
+      watchdao.updateWatch(watch,req.body.id)
+      .then((data)=>{
+          res.send(data);
+      })
+      .catch((error)=>{
+          res.status(401).send({message: "Watch stock update fail."})
+  
+      });
+}
+
 
 var watchController = {
     findaAllwatches:findaAllwatches,
     findwatchbyid:findwatchbyid,
     addnewwatch:addnewwatch,
-    updatewatch:updatewatch
+    updatewatch:updatewatch,
+    updatewatchstock:updatewatchstock
 
 
 }
