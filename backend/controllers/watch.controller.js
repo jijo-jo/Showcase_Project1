@@ -72,14 +72,16 @@ function updatewatch(req,res){
         For_whom:req.body.forwhom,
         Price:req.body.price,
         Offer:req.body.offer,
-        Stockavailable:req.body.stock,
-        Image: `/images/products/${req.body.name}-${req.body.model}-copy.png`
+        Stockavailable:req.body.stock
       }
-      let filePath = req.body.image;
-      let filePathCopy = `D:/My projects/Showcase_Project1/frontend/public/images/products/${req.body.name}-${req.body.model}-copy.png`;
-      fs.copyFile(filePath, filePathCopy, (err) => {
-        if (err) throw err;
-      });
+      if(req.body.image){
+        let filePath = req.body.image;
+        let filePathCopy = `D:/My projects/Showcase_Project1/frontend/public/images/products/${req.body.name}-${req.body.model}-copy.png`;
+        fs.copyFile(filePath, filePathCopy, (err) => {
+          if (err) throw err;
+        });
+        watch.Image = `/images/products/${req.body.name}-${req.body.model}-copy.png`
+      }
       watchdao.updateWatch(watch,req.body.id)
       .then((data)=>{
           res.send(data);

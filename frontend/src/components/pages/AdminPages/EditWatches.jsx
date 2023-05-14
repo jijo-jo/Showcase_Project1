@@ -9,8 +9,10 @@ import '../UserRegSignIn.css'
 export default function Editwatch() {
     const [values, setValues] = useState({});
     const {id}= useParams()
+    const [flag,setFlag] = useState(false)
     const [file, setFile] = useState("");
     function handleChange(e) {
+    setFlag(true)
        setFile(e.target.value) 
     }
     useEffect(()=>{
@@ -27,15 +29,14 @@ export default function Editwatch() {
                 forwhom:response.data.For_whom,
                 price:response.data.Price,
                 offer:response.data.Offer,
-                stock_available:response.data.Stockavailable,
-                image_url:response.data.Image
+                stock_available:response.data.Stockavailable
             };
             console.log(initialwatchvalues);
             setFile(response.data.Image)
             setValues(initialwatchvalues)
 
         }).catch((err)=>{
-
+          console.log(err)
         })
     },[])
 
@@ -58,7 +59,10 @@ export default function Editwatch() {
         price:parseInt(values.price),
         offer:parseInt(values.offer),
         stock:parseInt(values.stock_available),
-        image:file
+        id:id
+     }
+     if(flag){
+        watchinput.image=file
      }
     await updateAwatch(watchinput)
     .then((response)=>{
