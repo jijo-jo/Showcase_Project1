@@ -50,6 +50,11 @@ const Users = db.define("users", {
         field:"district",
         allowNull: false
       },
+    ShippingAddress:{
+      type: Sequelize.STRING,
+      field:"shippingaddress",
+      allowNull: true
+    },
     Phonenumber: {
         type: Sequelize.STRING,
         field:"phonenumber",

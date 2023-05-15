@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const { DATEONLY } = require('sequelize');
+const { response } = require('express');
 dotenv.config();
 
 function findAllusers(req,res){
@@ -110,17 +111,39 @@ async function userRegister(req,res){
 async function deleteUser(req,res){
     userdao.deleteById(req.body.id)
     .then((resdata)=>{
-        res.send(resdata);
+        res.send(resdata.data);
        }).catch((error)=>{
         res.status(401).send({message: "User delete error"+error})
        })
+}
+
+async function getalluserbyId(req,res){
+    console.log(req.body.id);
+    userdao.findById(req.body.id)
+    .then((response)=>{
+        res.send(response);
+    }).catch((err)=>{
+        console.log(err);
+    })
+}
+
+async function updateShippingAddress(req,res){
+    console.log(req.body.ship)
+    userdao.updateDb({ShippingAddress:req.body.ship},req.body.id)
+    .then((response)=>{
+        res.send(response)
+    }).catch((err)=>{
+        res.status(401).send({message: "User delete error"+err})
+    })
 }
 var usercontroller ={
     findAllusers:findAllusers,
     userLogin:userLogin,
     userRegister:userRegister,
     deleteUser:deleteUser,
-    findDeliveryBoy:findDeliveryBoy
+    findDeliveryBoy:findDeliveryBoy,
+    getalluserbyId:getalluserbyId,
+    updateShippingAddress:updateShippingAddress
 }
 
 module.exports = usercontroller;

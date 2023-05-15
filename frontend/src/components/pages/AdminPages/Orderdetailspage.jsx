@@ -80,7 +80,7 @@ function Orderdeatailspage() {
         }).catch((err)=>{
             console.log(err)
         })
-        window.location = '/home'
+        // window.location = '/home'
     }
     const items = [
         {

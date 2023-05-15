@@ -22,6 +22,8 @@ var ORDER_STATUS = "http://localhost:4000/orders/orderstatus"
 var UPDATE_DELBOY = "http://localhost:4000/orders/updatedelboy"
 var ALL_PENDING_DELIVERY="http://localhost:4000/orders/allpendingdelivery"
 var UPDATE_DEL_STATUS="http://localhost:4000/orders/deliverystatrus"
+var GET_USER_BYID ="http://localhost:4000/users/getuser"
+var UPDATE_SHIPPING_ADDRESS = "http://localhost:4000/users/changeshipaddress"
 
 export async function login(data){
     console.log(data);
@@ -109,4 +111,12 @@ export async function allpendingdelivery(data){
 
 export async function updateDeliverystatus(data){
     return axios.post(UPDATE_DEL_STATUS,data);
+}
+
+export async function getUserbyUserId(data){
+    return axios.post(GET_USER_BYID,data);
+}
+
+export async function updateshippingaddress(data){
+    return axios.post(UPDATE_SHIPPING_ADDRESS,data);
 }
